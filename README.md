@@ -1,4 +1,66 @@
 # Getting Started with Create React App
+## useRef hook
+
+ useRef hook is mainly used for two uses cases
+ a. to access DOM element
+ b. to preserve a value between re-renders.
+
+ a change in the useRef value does not cause re-rendering unlike the
+ change in useState value.
+
+ usually useRef is updated either inside a event handler or
+ useEffect hook.
+
+In the below example we have discusses about the two main use cases
+
+```HTML
+import { useRef } from "react";
+
+
+function App() {
+
+
+
+  const elementref=useRef(null)
+
+  const countRef = useRef(0);
+
+  const increment = () => {
+    countRef.current = countRef.current + 1;
+    console.log('Count:', countRef.current);
+  };
+
+  const handleInput=()=>{
+   // accessing the input element
+   let inputElement = elementref.current;
+
+   // modify the DOM element
+   inputElement.focus();
+   
+   inputElement.style.backgroundColor = 'red';
+
+
+  }
+
+  console.log("am rendering");
+
+  return (
+    <div>
+      <p>Count: {countRef.current}</p>
+      <button onClick={increment}>Increment</button><br/>
+      
+      <label htmlFor="inputData" > Eneter a some text
+      <input type="text" id="inputData" ref={elementref}/>
+      </label> <br/>
+      <button onClick={handleInput}>Click to change the color of input element</button>
+      
+    </div>
+  );
+}
+
+export default App;
+
+```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
